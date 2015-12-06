@@ -5,13 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import java.lang.*;
 import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
 import com.qualcomm.robotcore.util.Range;
-import android.app.Activity;
-import android.graphics.Color;
-import android.view.View;
-
 
 /**
  * Created by alexbulanov on 11/1/15.
@@ -27,7 +21,6 @@ public class AutonomousJacobAndAlex extends OpMode {
     DcMotor rightDriveB;
     Servo buttonServo;
     Servo climberServo;
-    ColorSensor colorSensor;
 
     @Override public void init() {
         rightDrive = hardwareMap.dcMotor.get("rightDrive");
@@ -36,48 +29,13 @@ public class AutonomousJacobAndAlex extends OpMode {
         leftDriveB = hardwareMap.dcMotor.get("leftDriveB");
         buttonServo = hardwareMap.servo.get("buttonServo");
         climberServo = hardwareMap.servo.get("climberServo");
-        colorSensor = hardwareMap.colorSensor.get("colorSensor");
-
 
         //motor power values is between -1 and 1 gud
         buttonServo.setPosition(0);
         climberServo.setPosition(0);
-        float hsvValues[] = {0,0,0};
-        final float values[] = hsvValues;
+
         drive(1.0, 0.5, 2.0); //LeftPower, RightPower, Seconds
-        telemetry.addData("Clear", colorSensor.alpha());
-        telemetry.addData("Red  ", colorSensor.red());
-        telemetry.addData("Green", colorSensor.green());
-        telemetry.addData("Blue ", colorSensor.blue());
-        telemetry.addData("Hue", hsvValues[0]);
-
-        /*
-        if(colorSensor.red() >= someInt)
-        {
-            turn(blah);
-            drive(blah);
-            push(blah);
-        }
-        else if(colorSensor.blue >= someInt)
-        {
-            push(blah);
-        }
-        else
-        {
-            turn(1.0, 1.0);  //this will let us know something went wrong
-            //in future, have robot readjust and rerun
-        }
-         */
-
-
-        //base thing
-        //colorSensor.red should be greater than a certain value
-        //or colorSensor.blue should be greater than a certain value
-        //after driving
-        //
-        //and then do stuff to hit button accordingly
     }
-
     @Override public void loop ()
     {
 
@@ -109,4 +67,3 @@ public class AutonomousJacobAndAlex extends OpMode {
         }
     }
 }
-
