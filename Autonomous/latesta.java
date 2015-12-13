@@ -25,8 +25,8 @@ public class AutonomousJacobAndAlex extends OpMode {
     DcMotor rightDrive;
     DcMotor leftDriveB;
     DcMotor rightDriveB;
-    /*public static*/ Servo buttonServo;
-    /*public static*/ Servo climberServo;  //made public static so i can use in functions OKEE
+    Servo buttonServo;
+    Servo climberServo;  
     ColorSensor colorSensor;
 
     @Override public void init() {
@@ -48,19 +48,20 @@ public class AutonomousJacobAndAlex extends OpMode {
         telemetry.addData("Green", colorSensor.green());
         telemetry.addData("Blue ", colorSensor.blue());
         
-        
+        operate(climberServo, 1.0, 1000.0);
         if(colorSensor.red() >= 80) //test val
         {
             turn(RIGHT, 1.5); //90+45 degrees
             drive(MOTOR_FORWARD, MOTOR_FORWARD, 0.5);
             turn(LEFT, 1.5); //' '
             drive(MOTOR_FORWARD, MOTOR_FORWARD, 0.5); //change to pythagorean of 0.5 being the hypot and the base of the triangle being the distance between buttons
-            push();
+            operate(buttonServo, 1.0, 1000.0);
+            
             
         }
         else if(colorSensor.blue >= 80)
         {
-            push();
+            operate(climberServo, 1.0, 1000.0);
         }
         else
         {
@@ -111,15 +112,15 @@ public class AutonomousJacobAndAlex extends OpMode {
             drive(1.0,-1.0,seconds);
         }
     }
-    public void push(){
-    	buttonPusher.setPosition(0.5);
+    public void operate(Servo ser, double position, double wait = 0.0){
+    	ser.setPosition(position); 
     	try {
-    		Thread.sleep(1000.0);
+    		Thread.sleep(wait);
     	} catch (Exception e) {
     		System.err.println(e);
     		System.exit(1);
     	}
-    	buttonPusher.setPosition(0);
+    	ser.setPosition(0);
     }
 }
 
