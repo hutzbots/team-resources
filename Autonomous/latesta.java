@@ -54,8 +54,8 @@ public class AutonomousJacobAndAlex extends OpMode {
             turn(RIGHT, 1.5); //90+45 degrees
             drive(MOTOR_FORWARD, MOTOR_FORWARD, 0.5);
             turn(LEFT, 1.5); //' '
-            drive(MOTOR_FORWARD, MOTOR_FORWARD, 0.5); //change to pythagorean of 0.5 being the hypot and the base of the triangle being the distance between buttons
-            operate(buttonServo, 1.0, 1000.0);
+            drive(MOTOR_FORWARD, MOTOR_FORWARD, 0.5); //time to drive 10.7906209275 inches
+            operate(buttonServo, 1.0, 1000.0); 
             
             
         }
